@@ -15,9 +15,16 @@ spec:
         service: backend-feed
     spec:
       containers:
-      - image: phuoc05pp/udagram-api-feed
-        name: backend-feed
-        imagePullPolicy: Always                
+      - name: backend-feed
+        image: phuoc05pp/udagram-api-feed
+        imagePullPolicy: Always  
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "2048Mi"
+            cpu: "500m"                  
         env:
         - name: URL
           valueFrom:
@@ -39,11 +46,6 @@ spec:
             configMapKeyRef:
               name: env-config
               key: AWS_REGION
-        - name: JWT_SECRET
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: JWT_SECRET
         - name: POSTGRES_DB
           valueFrom:
             configMapKeyRef:
@@ -72,4 +74,4 @@ spec:
       volumes:
       - name: aws-secret
         secret:
-          secretName: aws-secret
+          secretName: aws-secret       

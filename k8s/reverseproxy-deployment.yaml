@@ -5,7 +5,7 @@ metadata:
     service: reverseproxy
   name: reverseproxy
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       service: reverseproxy
@@ -16,15 +16,15 @@ spec:
     spec:
       containers:
         - image: phuoc05pp/reverseproxy
-          name: reverseproxy
-          imagePullPolicy: Always
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "1024Mi"
-              cpu: "500m"
-          ports:
-            - containerPort: 8080
+        name: reverseproxy
+        imagePullPolicy: Always          
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "2048Mi"
+            cpu: "500m"       
+        ports:
+        - containerPort: 8080
       restartPolicy: Always
